@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
-export default function useRecipes(search) {
-  const [recipes, setRecipes] = useState([]);
+export default function useFetch(url) {
+  const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -9,12 +9,10 @@ export default function useRecipes(search) {
     try {
       setLoading(true);
 
-      const response = await fetch(
-        `https://forkify-api.herokuapp.com/api/v2/recipes?search=${search}`
-      );
+      const response = await fetch(url);
       const data = await response.json();
 
-      data && data.data && data.data.recipes && setRecipes(data.data.recipes);
+      setData(data);
 
       setLoading(false);
     } catch (err) {
@@ -24,7 +22,7 @@ export default function useRecipes(search) {
   }
   useEffect(() => {
     fetchRecipes();
-  }, [search]);
+  }, [url]);
 
-  return [recipes, loading, error];
+  return [data, loading, error];
 }

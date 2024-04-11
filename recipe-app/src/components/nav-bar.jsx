@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Form, Link } from "react-router-dom";
-import starSvg from "../assets/star.svg";
 import Star from "./star-icon";
 
 export default function NavBar({ search, setSearch }) {

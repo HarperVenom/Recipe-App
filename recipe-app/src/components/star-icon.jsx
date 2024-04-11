@@ -1,6 +1,7 @@
-export default function Star() {
+export default function Star({ onClick }) {
   return (
     <svg
+      onClick={onClick}
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
       strokeWidth="1.5"

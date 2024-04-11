@@ -2,7 +2,7 @@ import { useState, createContext, useEffect } from "react";
 import NavBar from "../components/nav-bar";
 import "../styles.css";
 import { Outlet, useLoaderData } from "react-router-dom";
-import useRecipes from "../data/useRecipes";
+import useRecipes from "../data/useFetch";
 
 export const GlobalContext = createContext();
 
@@ -20,7 +20,6 @@ export async function loader({ request }) {
 export default function Root() {
   const searchInput = useLoaderData();
   const [search, setSearch] = useState(searchInput);
-  const [recipes, loading, error] = useRecipes(search);
 
   return (
     <div className="root">
@@ -29,6 +28,9 @@ export default function Root() {
         <GlobalContext.Provider value={searchInput}>
           <Outlet></Outlet>
         </GlobalContext.Provider>
+      </div>
+      <div className="footer">
+        <h2>©HarperVenom</h2>
       </div>
     </div>
   );

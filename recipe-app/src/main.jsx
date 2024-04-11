@@ -5,8 +5,15 @@ import Root, {
   action as rootAction,
   loader as rootLoader,
 } from "./routes/root";
-import Home from "./components/home";
+import HomePage from "./routes/homePage";
 import Favourite from "./routes/favourite";
+import RecipePage, { loader as recipeLoader } from "./routes/recipePage";
+import SearchPage from "./routes/searchPage";
+
+window.addEventListener("click", (e) => {
+  e.stopPropagation();
+  // console.log(e.);
+});
 
 const router = createBrowserRouter([
   {
@@ -15,10 +22,12 @@ const router = createBrowserRouter([
     loader: rootLoader,
     action: rootAction,
     children: [
-      { index: true, element: <Home></Home> },
-      // {
-      //   path:'/:'
-      // }
+      { index: true, element: <SearchPage></SearchPage> },
+      {
+        path: "/:recipeId",
+        element: <RecipePage></RecipePage>,
+        loader: recipeLoader,
+      },
       {
         path: "/favourite",
         element: <Favourite></Favourite>,
