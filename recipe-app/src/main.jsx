@@ -6,7 +6,7 @@ import Root, {
   loader as rootLoader,
 } from "./routes/root";
 import HomePage from "./routes/homePage";
-import Favourite from "./routes/favourite";
+import Favourite from "./routes/favouritesPage";
 import RecipePage, { loader as recipeLoader } from "./routes/recipePage";
 import SearchPage from "./routes/searchPage";
 

@@ -12,9 +12,7 @@ export default function RecipePage() {
   let [recipe, loading, error] = useFetch(
     `https://forkify-api.herokuapp.com/api/v2/recipes/${recipeId}`
   );
-  console.log(recipe);
   recipe = recipe && recipe.data && recipe.data.recipe;
-  console.log(recipe);
   return (
     <div className="recipe-page">
       {loading ? (

@@ -63,6 +63,7 @@ body {
   fill: white;
   text-shadow: 0 0 3px black;
   filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.2));
+  margin: 0;
 }
 
 .recipes-grid {
@@ -136,30 +137,45 @@ body {
   margin-top: auto;
   padding-bottom: 7px;
 }
-.recipe-container .star {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 40px;
-  margin: 1rem;
-  stroke: rgba(255, 255, 255, 0);
+.star {
+  user-select: none;
+  width: 70px;
+  stroke: rgb(255, 255, 255);
   stroke-width: 1px;
-  /* fill: #ffd000; */
   fill: none;
-  filter: drop-shadow(0 0 1px 3px rgba(255, 255, 255));
+  filter: drop-shadow(0 0 1px rgb(0, 0, 0));
   scale: 1;
   transition: all 0.1s ease;
   cursor: pointer;
   border-radius: 50%;
+  margin-right: 0.5rem;
+  outline: 2px solid rgba(255, 255, 255, 0);
+  padding: 0.3rem;
+}
+.recipe-container .star {
+  stroke: rgba(255, 255, 255, 0);
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 1rem;
+  width: 40px;
+}
+.recipe-container.favourite .star {
+  stroke: white;
+  fill: white;
+  filter: drop-shadow(0 0 2px black);
 }
 .recipe-container:hover .star {
   stroke: white;
   filter: drop-shadow(0 0 2px black);
 }
-.recipe-container .star:hover {
-  background-color: rgba(174, 174, 174, 0.2);
+.star:hover {
+  background-color: rgba(0, 0, 0, 0.1);
 }
-.recipe-container .star:active {
+.recipe-container .star:hover {
+  outline: 1px solid rgba(255, 255, 255, 0.4);
+}
+.star:active {
   scale: 0.9;
   fill: white;
 }
@@ -180,9 +196,6 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-.recipe-page .star {
-  width: 40px;
 }
 .recipe-page h1 {
   font-weight: 500;
