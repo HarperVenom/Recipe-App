@@ -106,6 +106,7 @@ body {
 }
 .recipe-container:hover {
   box-shadow: 0 0 15px white;
+  scale: 1.02;
 }
 .recipe:hover {
   box-shadow: 0 0 15px white;
@@ -160,7 +161,7 @@ body {
   margin: 1rem;
   width: 40px;
 }
-.recipe-container.favourite .star {
+.favourite .star {
   stroke: white;
   fill: white;
   filter: drop-shadow(0 0 2px black);
@@ -199,6 +200,9 @@ body {
 }
 .recipe-page h1 {
   font-weight: 500;
+}
+.recipe-page .star {
+  min-width: 20%;
 }
 .recipe-page .image {
   width: 100%;

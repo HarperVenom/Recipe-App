@@ -1,6 +1,5 @@
 import { useContext } from "react";
 import useFetch from "../data/useFetch";
-import { GlobalContext } from "./root";
 import Recipe from "../components/recipe";
 
 export default function HomePage() {

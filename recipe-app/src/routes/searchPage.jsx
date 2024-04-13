@@ -1,10 +1,10 @@
 import { useContext } from "react";
 import useFetch from "../data/useFetch";
-import { GlobalContext } from "./root";
 import Recipe from "../components/recipe";
 import HomePage from "./homePage";
 import useLocalStorage from "../data/useLocalStorage";
 import RecipesList from "../components/recipesList";
+import { GlobalContext } from "../components/GlobalState";
 
 export default function SearchPage() {
   const { searchInput: query } = useContext(GlobalContext);
@@ -12,14 +12,16 @@ export default function SearchPage() {
     `https://forkify-api.herokuapp.com/api/v2/recipes?search=${query}`
   );
 
+  const extractedRecipes = recipes &&
+    recipes.data &&
+    recipes.data.recipes &&
+    recipes.data.recipes.length > 0 && [...recipes.data.recipes];
+
   return (
     <div className="search-list">
-      {recipes &&
-      recipes.data &&
-      recipes.data.recipes &&
-      recipes.data.recipes.length > 0 ? (
+      {extractedRecipes ? (
         <RecipesList
-          recipes={recipes}
+          recipes={extractedRecipes}
           loading={loading}
           error={error}
         ></RecipesList>

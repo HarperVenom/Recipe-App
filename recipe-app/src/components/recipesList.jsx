@@ -2,45 +2,12 @@ import { useContext, useEffect, useState } from "react";
 import useFetch from "../data/useFetch";
 import useLocalStorage from "../data/useLocalStorage";
 import Recipe from "./recipe";
-import { GlobalContext } from "../routes/root";
+import { GlobalContext } from "./GlobalState";
 
 export default function RecipesList({ recipes, loading, error }) {
-  const { favourites, setFavourites } = useContext(GlobalContext);
-  const [favouriteitems, setFavouriteItems] = useState([]);
+  const { favouritesList } = useContext(GlobalContext);
 
-  useEffect(() => {
-    async function fetchRecipe(id) {
-      try {
-        const response = await fetch(
-          `https://forkify-api.herokuapp.com/api/v2/recipes/${id}`
-        );
-        return await response.json();
-      } catch (err) {
-        console.log(err.message);
-      }
-    }
-
-    async function fetchRecipes() {
-      const favouriteRecipes = await Promise.all(
-        favourites.map((id) => fetchRecipe(id))
-      );
-      setFavouriteItems(favouriteRecipes);
-    }
-    fetchRecipes();
-  }, [favourites]);
-
-  function handleAddFavourite(id) {
-    setFavourites(() => {
-      const currentValue = favourites.includes(id)
-        ? favourites
-        : [...favourites, id];
-      return currentValue;
-    });
-  }
-
-  function handleRemoveFavourite(id) {
-    setFavourites(favourites.filter((currentId) => currentId != id));
-  }
+  console.log(recipes);
 
   return (
     <div className="recipes-grid">
@@ -49,40 +16,19 @@ export default function RecipesList({ recipes, loading, error }) {
       ) : error ? (
         <div className="error">Error Occured: {error.message}</div>
       ) : recipes ? (
-        recipes.data.recipes.map((recipe) => (
+        recipes.map((recipe) => (
           <Recipe
-            className={favourites.includes(recipe.id) ? "favourite" : ""}
+            className={favouritesList.contains(recipe.id) ? "favourite" : ""}
             recipe={recipe}
             key={recipe.id}
-            onClick={
-              favourites.includes(recipe.id)
-                ? handleRemoveFavourite
-                : handleAddFavourite
+            onClick={() =>
+              favouritesList.contains(recipe.id)
+                ? favouritesList.remove(recipe.id)
+                : favouritesList.add(recipe.id)
             }
           ></Recipe>
         ))
-      ) : (
-        favouriteitems &&
-        favouriteitems.map(
-          (recipe) =>
-            recipe &&
-            recipe.data &&
-            recipe.data.recipe && (
-              <Recipe
-                className={
-                  favourites.includes(recipe.data.recipe.id) ? "favourite" : ""
-                }
-                recipe={recipe.data.recipe}
-                key={recipe.data.recipe.id}
-                onClick={
-                  favourites.includes(recipe.data.recipe.id)
-                    ? handleRemoveFavourite
-                    : handleAddFavourite
-                }
-              ></Recipe>
-            )
-        )
-      )}
+      ) : null}
     </div>
   );
 }

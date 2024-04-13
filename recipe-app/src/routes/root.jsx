@@ -4,13 +4,7 @@ import "../styles.css";
 import { Outlet, useLoaderData } from "react-router-dom";
 import useRecipes from "../data/useFetch";
 import useLocalStorage from "../data/useLocalStorage";
-
-export const GlobalContext = createContext();
-
-export async function action() {
-  console.log(action);
-  return null;
-}
+import GlobalState from "../components/GlobalState";
 
 export async function loader({ request }) {
   const url = new URL(request.url);
@@ -21,21 +15,18 @@ export async function loader({ request }) {
 export default function Root() {
   const searchInput = useLoaderData();
   const [search, setSearch] = useState(searchInput);
-  const [favourites, setFavourites] = useLocalStorage("favourites", []);
 
   return (
     <div className="root">
-      <NavBar search={search} setSearch={setSearch}></NavBar>
-      <div className="outlet">
-        <GlobalContext.Provider
-          value={{ searchInput, favourites, setFavourites }}
-        >
+      <GlobalState searchInput={searchInput}>
+        <NavBar search={search} setSearch={setSearch}></NavBar>
+        <div className="outlet">
           <Outlet></Outlet>
-        </GlobalContext.Provider>
-      </div>
-      <div className="footer">
-        <h2>©HarperVenom</h2>
-      </div>
+        </div>
+        <div className="footer">
+          <h2>©HarperVenom</h2>
+        </div>
+      </GlobalState>
     </div>
   );
 }

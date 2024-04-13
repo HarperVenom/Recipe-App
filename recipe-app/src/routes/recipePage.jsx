@@ -2,19 +2,26 @@ import { useLoaderData } from "react-router-dom";
 import useFetch from "../data/useFetch";
 import Clock from "../assets/clock.svg";
 import Star from "../components/star-icon";
+import { useContext } from "react";
+import { GlobalContext } from "../components/GlobalState";
 
 export async function loader({ params }) {
   return params.recipeId;
 }
 
 export default function RecipePage() {
+  const { favouritesList } = useContext(GlobalContext);
   const recipeId = useLoaderData();
   let [recipe, loading, error] = useFetch(
     `https://forkify-api.herokuapp.com/api/v2/recipes/${recipeId}`
   );
   recipe = recipe && recipe.data && recipe.data.recipe;
   return (
-    <div className="recipe-page">
+    <div
+      className={
+        "recipe-page " + (favouritesList.contains(recipeId) ? "favourite" : "")
+      }
+    >
       {loading ? (
         <div>Loading...</div>
       ) : error ? (
@@ -25,7 +32,13 @@ export default function RecipePage() {
           <div className="info">
             <div className="header">
               <h1>{recipe.title}</h1>
-              <Star></Star>
+              <Star
+                onClick={() =>
+                  favouritesList.contains(recipeId)
+                    ? favouritesList.remove(recipeId)
+                    : favouritesList.add(recipeId)
+                }
+              ></Star>
             </div>
 
             <p className="time">
@@ -36,8 +49,8 @@ export default function RecipePage() {
             </p>
             <ul>
               Ingredients:{" "}
-              {recipe.ingredients.map((ingredient) => (
-                <li>
+              {recipe.ingredients.map((ingredient, index) => (
+                <li key={index}>
                   {ingredient.description +
                     (ingredient.quantity
                       ? " - " +

@@ -1,10 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Root, {
-  action as rootAction,
-  loader as rootLoader,
-} from "./routes/root";
+import Root, { loader as rootLoader } from "./routes/root";
 import HomePage from "./routes/homePage";
 import Favourite from "./routes/favouritesPage";
 import RecipePage, { loader as recipeLoader } from "./routes/recipePage";
@@ -20,7 +17,6 @@ const router = createBrowserRouter([
     path: "/",
     element: <Root></Root>,
     loader: rootLoader,
-    action: rootAction,
     children: [
       { index: true, element: <SearchPage></SearchPage> },
       {
