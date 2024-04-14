@@ -1,8 +1,6 @@
 import { useContext } from "react";
 import useFetch from "../data/useFetch";
-import Recipe from "../components/Recipe";
 import HomePage from "./homePage";
-import useLocalStorage from "../data/useLocalStorage";
 import RecipesList from "../components/RecipesList";
 import { GlobalContext } from "../components/GlobalState";
 

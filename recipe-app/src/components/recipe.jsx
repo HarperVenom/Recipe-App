@@ -14,13 +14,13 @@ export default function Recipe({ recipe, onClick, className }) {
   );
 }
 
-function adjustTitle(title, chars) {
+export function adjustTitle(title, chars) {
   let modified = title;
 
   modified = modified.slice(0, 1).toUpperCase() + modified.slice(1);
 
   if (title.length > chars) {
-    modified = title.slice(0, chars) + "...";
+    modified = title.slice(0, chars).trim() + "...";
   }
   return modified;
 }

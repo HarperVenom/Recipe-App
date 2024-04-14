@@ -1,30 +1,69 @@
+import { useEffect, useMemo, useState } from "react";
 import Carousel from "../components/Carousel";
-import Spinner from "../components/Spinner";
 import useFetch from "../data/useFetch";
 
 export default function HomePage() {
-  const [recipes, loading, error] = useFetch(
-    `https://forkify-api.herokuapp.com/api/v2/recipes?search=${"apple"}`
+  const words = [
+    "Apple",
+    "Banana",
+    "Chocolate",
+    "Strawberry",
+    "Chicken",
+    "Lemon",
+    "Spicy",
+  ];
+  const currentWord = useMemo(
+    () => words[Math.round(Math.random() * words.length)],
+    []
+  );
+  const [row1, row1Loading, row1Error] = useFetch(
+    `https://forkify-api.herokuapp.com/api/v2/recipes?search=${currentWord}`
   );
 
-  const extractedRecipes =
-    recipes &&
-    recipes.data &&
-    recipes.data.recipes &&
-    recipes.data.recipes.length > 0 &&
-    [...recipes.data.recipes].filter((_, index) => index < 10);
+  const [extractedRow1, setExtractedRow1] = useState(null);
+
+  useEffect(() => {
+    setExtractedRow1(extractRecipes(row1));
+  }, [row1]);
+
+  function extractRecipes(recipes) {
+    if (
+      !(
+        recipes &&
+        recipes.data &&
+        recipes.data.recipes &&
+        recipes.data.recipes.length > 0
+      )
+    )
+      return;
+    const numberOfItems = 10;
+    const startingPoint = Math.round(
+      Math.random() * (recipes.data.recipes.length - numberOfItems)
+    );
+    return [...recipes.data.recipes].filter(
+      (_, index) => index > startingPoint && index < startingPoint + 10
+    );
+  }
 
   return (
     <div className="home">
-      <h1>Let's cook!</h1>
-      <h2>
-        Try searching for recipes using full words like "chocolate",
-        "strawberry", "pasta" etc.
-      </h2>
-      <Carousel
-        items={extractedRecipes && extractedRecipes}
-        direction="right"
-      ></Carousel>
+      <div className="hero">
+        <h1>Let's cook!</h1>
+        <h2>
+          Try searching for recipes using full words like "chocolate",
+          "strawberry", "pasta" etc.
+        </h2>
+      </div>
+      {extractedRow1 && (
+        <Carousel
+          items={extractedRow1 && extractedRow1}
+          direction="right"
+          keyWord={currentWord}
+          loading={row1Loading}
+          error={row1Error}
+          id={0}
+        ></Carousel>
+      )}
     </div>
   );
 }

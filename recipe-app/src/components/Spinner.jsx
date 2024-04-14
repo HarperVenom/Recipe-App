@@ -1,7 +1,6 @@
 import PulseLoader from "react-spinners/PulseLoader";
 
 const override = {
-  // margin: "8rem",
   display: "flex",
   position: "absolute",
   top: "8rem",

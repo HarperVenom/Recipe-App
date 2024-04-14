@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Form, Link } from "react-router-dom";
 import Star from "./Star";
 import Search from "../assets/search.svg";

@@ -10,6 +10,10 @@ export default function useFetch(url) {
       setLoading(true);
 
       const response = await fetch(url);
+      if (!response.ok) {
+        const errorMessage = await response.text();
+        throw new Error(errorMessage);
+      }
       const data = await response.json();
 
       setData(data);
