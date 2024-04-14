@@ -1,9 +1,7 @@
-import { useState, createContext, useEffect } from "react";
-import NavBar from "../components/nav-bar";
+import { useState } from "react";
+import NavBar from "../components/Navbar";
 import "../styles.css";
 import { Outlet, useLoaderData } from "react-router-dom";
-import useRecipes from "../data/useFetch";
-import useLocalStorage from "../data/useLocalStorage";
 import GlobalState from "../components/GlobalState";
 
 export async function loader({ request }) {

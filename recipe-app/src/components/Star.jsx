@@ -1,11 +1,11 @@
-export default function Star({ onClick }) {
+export default function Star({ onClick, className }) {
   return (
     <svg
       onClick={onClick}
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
       strokeWidth="1.5"
-      className="star"
+      className={"star " + className}
     >
       <path
         strokeLinecap="round"

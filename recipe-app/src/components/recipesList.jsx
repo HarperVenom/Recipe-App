@@ -1,21 +1,18 @@
-import { useContext, useEffect, useState } from "react";
-import useFetch from "../data/useFetch";
-import useLocalStorage from "../data/useLocalStorage";
-import Recipe from "./recipe";
+import { useContext } from "react";
+import Recipe from "./Recipe";
 import { GlobalContext } from "./GlobalState";
+import Spinner from "./Spinner";
 
-export default function RecipesList({ recipes, loading, error }) {
+export default function RecipesList({ recipes, loading, error, empty }) {
   const { favouritesList } = useContext(GlobalContext);
-
-  console.log(recipes);
 
   return (
     <div className="recipes-grid">
       {loading ? (
-        <div className="loading">Loading...</div>
+        <Spinner loading={loading} />
       ) : error ? (
         <div className="error">Error Occured: {error.message}</div>
-      ) : recipes ? (
+      ) : recipes && recipes.length > 0 ? (
         recipes.map((recipe) => (
           <Recipe
             className={favouritesList.contains(recipe.id) ? "favourite" : ""}
@@ -28,7 +25,9 @@ export default function RecipesList({ recipes, loading, error }) {
             }
           ></Recipe>
         ))
-      ) : null}
+      ) : (
+        empty
+      )}
     </div>
   );
 }

@@ -1,7 +1,5 @@
-import { useEffect } from "react";
-import Star from "./star-icon";
+import Star from "./Star";
 import { Link } from "react-router-dom";
-import useLocalStorage from "../data/useLocalStorage";
 
 export default function Recipe({ recipe, onClick, className }) {
   return (
