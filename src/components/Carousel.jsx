@@ -93,7 +93,7 @@ const Carousel = ({
             {array &&
               array.map((item, index) => (
                 <Link
-                  to={"/" + item.id}
+                  to={"/Recipe-App/" + item.id}
                   key={item.id}
                   className={
                     "item " +
