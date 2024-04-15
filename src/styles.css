@@ -388,15 +388,14 @@ body {
 }
 
 .empty-container {
-  width: 100%;
   position: absolute;
-  top: 5rem;
-  left: calc(50vw - 50%);
-  margin: auto;
+  top: 10rem;
+  left: 50%;
+  transform: translate(-50%, 0);
   color: #878b7c;
   font-style: italic;
   text-align: center;
-  margin-top: 5rem;
+  box-sizing: border-box;
 }
 .empty-container h1 {
   font-weight: 500;

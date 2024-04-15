@@ -6,7 +6,7 @@ export default function NavBar({ search, setSearch }) {
   return (
     <div className="nav-bar">
       <div className="wrapper">
-        <Link to={"/"} className="home-button">
+        <Link to={"/Recipe-App/"} className="home-button">
           <img
             src="https://em-content.zobj.net/source/google/387/man-cook_1f468-200d-1f373.png"
             alt=""
@@ -26,7 +26,7 @@ export default function NavBar({ search, setSearch }) {
 
         <ul>
           <li>
-            <Link to={"/favourite"}>
+            <Link to={"/Recipe-App/favourite"}>
               <Star></Star>
             </Link>
           </li>

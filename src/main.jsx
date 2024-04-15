@@ -14,19 +14,19 @@ window.addEventListener("click", (e) => {
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/Recipe-App/",
     element: <Root></Root>,
     loader: rootLoader,
     errorElement: <ErrorPage />,
     children: [
       { index: true, element: <SearchPage></SearchPage> },
       {
-        path: "/:recipeId",
+        path: "/Recipe-App/:recipeId",
         element: <RecipePage></RecipePage>,
         loader: recipeLoader,
       },
       {
-        path: "/favourite",
+        path: "/Recipe-App/favourite",
         element: <Favourite></Favourite>,
       },
     ],
