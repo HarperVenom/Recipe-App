@@ -24,8 +24,8 @@ const Carousel = ({
 
   function startAnimation() {
     intervalRef.current = setInterval(() => {
-      setShift((prev) => (direction === "left" ? prev + 0.1 : prev - 0.1));
-    }, 0.1);
+      setShift((prev) => (direction === "left" ? prev + 0.2 : prev - 0.2));
+    }, 10);
   }
 
   useEffect(() => {
@@ -51,6 +51,7 @@ const Carousel = ({
     if (carousel && array) {
       const carouselLength =
         carousel.getBoundingClientRect().width / array.length;
+
       if (
         direction === "left"
           ? carouselLength - shift <= 0
