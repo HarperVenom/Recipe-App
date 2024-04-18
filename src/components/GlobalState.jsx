@@ -19,6 +19,27 @@ export default function GlobalState({ children, searchInput }) {
       }
     }
 
+    if (
+      favouriteitems &&
+      favouriteitems.length > 0 &&
+      favouriteitems.length > favourites.length
+    ) {
+      setFavouriteItems(
+        favouriteitems.filter((item) =>
+          favourites.includes(item.data.recipe.id)
+        )
+      );
+      return;
+    }
+
+    if (favouriteitems.length + 1 === favourites.length) {
+      async function getNewItem() {
+        return await fetchRecipe(favourites[favourites.length - 1]);
+      }
+      getNewItem().then((newItem) => favouriteitems.push(newItem));
+      return;
+    }
+
     async function fetchRecipes() {
       const favouriteRecipes = await Promise.all(
         favourites.map((id) => fetchRecipe(id))

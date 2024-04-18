@@ -98,8 +98,12 @@ body {
   width: 40px;
   fill: white;
   text-shadow: 0 0 3px black;
-  filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.2));
+  box-shadow: none;
   margin: 0;
+  background-color: rgba(255, 255, 255, 0);
+}
+.nav-bar .star:hover {
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 .home {
@@ -145,6 +149,7 @@ body {
   gap: 1rem;
   padding: 1.5rem 0.5rem;
   max-width: 1000px;
+  min-height: 300px;
   place-content: center;
   margin: auto;
 }
@@ -216,17 +221,16 @@ body {
   stroke: rgb(255, 255, 255);
   stroke-width: 1px;
   fill: none;
-  filter: drop-shadow(0 0 1px rgb(0, 0, 0));
+  background-color: #e0990b;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
   scale: 1;
   transition: all 0.1s ease;
   cursor: pointer;
   border-radius: 50%;
   margin-right: 0.5rem;
-  outline: 2px solid rgba(255, 255, 255, 0);
   padding: 0.3rem;
 }
 .recipe-container .star {
-  stroke: rgba(255, 255, 255, 0);
   position: absolute;
   top: 0;
   right: 0;
@@ -234,20 +238,13 @@ body {
   width: 40px;
 }
 .favourite .star {
-  stroke: white;
   fill: white;
-  filter: drop-shadow(0 0 2px black);
 }
-.recipe-container:hover .star {
-  stroke: white;
-  filter: drop-shadow(0 0 2px black);
-}
+
 .star:hover {
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgb(199, 133, 0);
 }
-.recipe-container .star:hover {
-  outline: 1px solid rgba(255, 255, 255, 0.4);
-}
+
 .star:active {
   scale: 0.9;
   fill: white;
@@ -426,11 +423,11 @@ body {
 }
 
 .carousel-container {
+  position: relative;
   display: flex;
   flex-direction: column;
   margin-bottom: 6rem;
   margin-top: auto;
-  /* align-self: flex-start; */
 }
 .carousel-container .header {
   position: relative;
@@ -446,14 +443,12 @@ body {
   margin: auto;
 }
 
-@media screen and (min-width: 500px) {
-  .carousel-container span {
-    position: relative;
-  }
-}
 .carousel {
+  position: relative;
   overflow: hidden;
   display: flex;
+  min-height: 200px;
+  min-width: 500px;
 }
 .carousel .line {
   display: flex;
@@ -498,6 +493,12 @@ body {
 }
 
 @media screen and (min-width: 500px) {
+  .carousel-container span {
+    position: relative;
+  }
+  .carousel {
+    min-height: 286px;
+  }
   .carousel .item {
     min-width: 400px;
     height: 250px;
@@ -507,6 +508,15 @@ body {
   }
 }
 
+.error-block {
+  position: absolute;
+  text-align: center;
+  width: 90vw;
+  max-width: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 .error-page {
   color: #5d5a51;
   display: flex;

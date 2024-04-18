@@ -7,11 +7,6 @@ import RecipePage, { loader as recipeLoader } from "./routes/recipePage";
 import SearchPage from "./routes/searchPage";
 import ErrorPage from "./components/ErrorPage";
 
-window.addEventListener("click", (e) => {
-  e.stopPropagation();
-  // console.log(e.);
-});
-
 const router = createBrowserRouter([
   {
     path: "/Recipe-App/",

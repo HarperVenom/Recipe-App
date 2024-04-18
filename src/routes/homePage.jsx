@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Carousel from "../components/Carousel";
 import useFetch from "../data/useFetch";
 
@@ -12,10 +12,12 @@ export default function HomePage() {
     "Lemon",
     "Spicy",
   ];
-  const currentWord = useMemo(
-    () => words[Math.round(Math.random() * words.length)],
-    []
+  const currentWordRef = useRef(
+    words[Math.floor(Math.random() * words.length)]
   );
+
+  const currentWord = currentWordRef.current;
+
   const [row1, row1Loading, row1Error] = useFetch(
     `https://forkify-api.herokuapp.com/api/v2/recipes?search=${currentWord}`
   );
@@ -54,16 +56,14 @@ export default function HomePage() {
           "strawberry", "pasta" etc.
         </h2>
       </div>
-      {extractedRow1 && (
-        <Carousel
-          items={extractedRow1 && extractedRow1}
-          direction="right"
-          keyWord={currentWord}
-          loading={row1Loading}
-          error={row1Error}
-          id={0}
-        ></Carousel>
-      )}
+      <Carousel
+        items={extractedRow1 && extractedRow1}
+        direction="right"
+        keyWord={currentWord}
+        loading={row1Loading}
+        error={row1Error}
+        id={0}
+      ></Carousel>
     </div>
   );
 }

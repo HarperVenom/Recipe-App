@@ -11,7 +11,7 @@ export default function RecipesList({ recipes, loading, error, empty }) {
       {loading ? (
         <Spinner loading={loading} />
       ) : error ? (
-        <div className="error">Error Occured: {error.message}</div>
+        <div className="error-block">Error Occured: {error.message}</div>
       ) : recipes && recipes.length > 0 ? (
         recipes.map((recipe) => (
           <Recipe

@@ -88,7 +88,7 @@ const Carousel = ({
         {loading ? (
           <Spinner loading={loading} />
         ) : error ? (
-          <div>An error occured: {error.message}</div>
+          <div className="error-block">An error occured: {error.message}</div>
         ) : (
           <div id={id} className="line">
             {array &&

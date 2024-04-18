@@ -22,7 +22,7 @@ export default function Root() {
           <Outlet></Outlet>
         </div>
         <div className="footer">
-          <h2>©HarperVenom</h2>
+          <h2>©HarperVenom. Made using Forkify API</h2>
         </div>
       </GlobalState>
     </div>
